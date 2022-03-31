@@ -1,4 +1,3 @@
-import { hashSync } from 'bcrypt';
 import { Billet } from '../models/Billet.js';
 import { Unit } from '../models/Unit.js';
 
