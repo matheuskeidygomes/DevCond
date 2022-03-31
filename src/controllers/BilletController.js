@@ -1,10 +1,17 @@
 import * as BilletServices from '../services/BilletServices.js';
+import JWT from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export const getAll = async (req, res) => {
 
-    const { unity, user } = req.query;
+    const { unity } = req.query;
+    let auth = req.headers.authorization.split(" ");
+    let token = JWT.verify(auth[1], process.env.JWT_SECRET_KEY);
+    let user = token.id;
 
-    if (unity && user) {
+    if (unity) {
 
         let list = await BilletServices.getAll(unity, user);
 
@@ -12,7 +19,7 @@ export const getAll = async (req, res) => {
 
     } else {
 
-        res.json({ error: "Please, insert the unity id and user id."});
+        res.json({ error: "Please, insert the unity id."});
     }
 
 }

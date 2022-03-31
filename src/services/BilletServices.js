@@ -1,16 +1,17 @@
+import { hashSync } from 'bcrypt';
 import { Billet } from '../models/Billet.js';
 import { Unit } from '../models/Unit.js';
 
 
 export const getAll = async (unity, user) => {
 
-    let hasUser = await Unit.findOne({ where: { id_owner: user} });
+    let hasUnit = await Unit.findOne({ where: { id: unity } });
 
-    if (hasUser) {
+    if (hasUnit) {
 
-        let hasUnit = await Unit.findOne({ where: { id: unity } });
+        let hasUser = await Unit.findOne({ where: { id: unity, id_owner: user} });
 
-        if (hasUnit) {
+        if (hasUser) {
 
             let list = await Billet.findAll({ where: { id_unit: unity } });
 
@@ -25,12 +26,12 @@ export const getAll = async (unity, user) => {
 
         } else {
 
-            return ({ error: "This unity doesn't exist."});
+            return ({ error: "This unity isn't your."});
         }
 
     } else {
 
-        return ({ error: "This unity isn't your."})
+        return ({ error: "This unity doesn't exist."})
     }
 
 }
