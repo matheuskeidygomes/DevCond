@@ -21,7 +21,7 @@ export const FoundAndLost = database.define('FoundAndLost', {
         type: Sequelize.STRING,
     },
     datecreated: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
     }
 },
 {

@@ -19,7 +19,7 @@ routes.post('/register', UserController.Register);
 
 // Warning Wall
 
-routes.get('/walls', WallController.getAll);
+routes.get('/walls', Auth.private, WallController.getAll);
 routes.post('/walls/:id/like', Auth.private, WallController.Like);
 
 
@@ -37,17 +37,17 @@ routes.post('/billets', Auth.private, uploadBillets.single('file'), BilletContro
 // Warnings
 
 routes.get('/warnings', Auth.private, WarningController.getMyWarnings);
+routes.post('/warnings', Auth.private, uploadWarnings.single('file'), WarningController.addWarning);
 
-
-routes.post('/warnings', uploadWarnings.single('file'), WarningController.addWarning);
-/*
 
 
 // Lost and Found
 
 routes.get('/foundandlost', Auth.private, FoundAndLostController.getAll);
-routes.post('/foundandlost', Auth.private, FoundAndLostController.AddLostAndFound);
-routes.put('/foundandlost/:id', Auth.private, FoundAndLostController.UpdateLostAndFound);
+
+/*
+routes.post('/foundandlost', Auth.private, FoundAndLostController.AddFoundAndLost);
+routes.put('/foundandlost/:id', Auth.private, FoundAndLostController.UpdateFoundAndLost);
 
 // Unit
 
