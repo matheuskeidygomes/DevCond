@@ -26,13 +26,29 @@ export const getMyWarnings = async (req, res) => {
 
 export const addWarning = async (req, res) => {
 
-    const { unity, title } = req.body;
+    const { title, unity } = req.body;
     const file = req.file;
 
-    if(unity, title) {
+    let auth = req.headers.authorization.split(" ");
+    let token = JWT.verify(auth[1], process.env.JWT_SECRET_KEY);
+    let userId = token.id;
+
+    if(title) {
+
+        if (unity) {
+
+            let warning = await WarningServices.addWarning(userId, title, unity, file);
+
+            res.json(warning);
+
+        } else {
+
+            res.json({ error: "Unity ID is necessary. "})
+        }
 
     } else {
-
+        
+        return res.json({ error: "Warning title is necessary."})
     }
 
 }

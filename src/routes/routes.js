@@ -8,7 +8,7 @@ import * as UnitController from '../controllers/UnitController.js';
 import * as UserController from '../controllers/UserController.js';
 import * as WallController from '../controllers/WallController.js';
 import * as WarningController from '../controllers/WarningController.js';
-import { uploadBillets, uploadDocs } from '../helpers/multerHelper.js';
+import { uploadBillets, uploadDocs, uploadWarnings } from '../helpers/multerHelper.js';
 
 const routes = Router();
 
@@ -38,9 +38,9 @@ routes.post('/billets', Auth.private, uploadBillets.single('file'), BilletContro
 
 routes.get('/warnings', Auth.private, WarningController.getMyWarnings);
 
-/*
-routes.post('/warnings', Auth.private, WarningController.AddWarning);
 
+routes.post('/warnings', uploadWarnings.single('file'), WarningController.addWarning);
+/*
 
 
 // Lost and Found

@@ -1,9 +1,10 @@
 import { Unit } from '../models/Unit.js';
 import { Warning } from '../models/Warning.js';
+import { formatedDate } from '../helpers/dateHelper.js';
 
 export const getMyWarnings = async (unity, userId) => {
 
-    let hasUnity = await Unit.findOne({ where: { id_owner: userId } });
+    let hasUnity = await Unit.findOne({ where: { id: unity, id_owner: userId } });
 
     if (hasUnity) {
 
@@ -34,6 +35,37 @@ export const getMyWarnings = async (unity, userId) => {
 
 }
 
-export const addWarning = async () => {
+export const addWarning = async (userId, title, unity, file) => {
+
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let formatDate = `${year}-${formatedDate(month)}-${formatedDate(day)}`
+
+    let hasUnit = await Unit.findOne({ where: { id: unity, id_owner: userId } });
+
+    if (hasUnit) {
+
+        if (file) {
+
+            const filename = `${file.filename}`;
+    
+            let warning = await Warning.create({ id_unit: unity, title, status: "In Review", datecreated: formatDate, photos: `warnings/${filename}` });
+        
+            return warning;
+    
+        } else {
+    
+            let warning = await Warning.create({ id_unit: unity, title, status: "In Review", datecreated: formatDate, photos: `` });
+    
+            return warning;
+        }
+    
+
+    } else {
+
+        return ({ error: "This unity isn't yours. "});
+    }
 
 }
