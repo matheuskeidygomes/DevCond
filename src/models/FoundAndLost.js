@@ -17,7 +17,7 @@ export const FoundAndLost = database.define('FoundAndLost', {
     description: {
         type: Sequelize.STRING,
     },
-    where: {
+    local: {
         type: Sequelize.STRING,
     },
     datecreated: {
