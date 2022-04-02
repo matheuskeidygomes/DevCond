@@ -22,7 +22,6 @@ routes.post('/register', UserController.Register);
 routes.get('/walls', Auth.private, WallController.getAll);
 routes.post('/walls/:id/like', Auth.private, WallController.Like);
 
-
 // Documents
 
 routes.get('/docs', Auth.private, DocController.getAll);
@@ -33,22 +32,19 @@ routes.post('/docs', Auth.private, uploadDocs.single('file'), DocController.addD
 routes.get('/billets', Auth.private, BilletController.getAll);
 routes.post('/billets', Auth.private, uploadBillets.single('file'), BilletController.addBillet);
 
-
 // Warnings
 
 routes.get('/warnings', Auth.private, WarningController.getMyWarnings);
 routes.post('/warnings', Auth.private, uploadWarnings.single('file'), WarningController.addWarning);
 
-
-
 // Lost and Found
 
 routes.get('/foundandlost', Auth.private, FoundAndLostController.getAll);
-
-
 routes.post('/foundandlost', Auth.private, uploadFoundAndLost.single('file'), FoundAndLostController.AddFoundAndLost);
 routes.put('/foundandlost/:id', Auth.private, uploadFoundAndLost.single('file'), FoundAndLostController.UpdateFoundAndLost);
+
 /*
+
 // Unit
 
 routes.get('/unit/:id', Auth.private, UnitController.getInfo);
