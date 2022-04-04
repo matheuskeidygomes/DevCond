@@ -67,7 +67,7 @@ export const AddFoundAndLost = async (file, description, local) => {
 
 export const UpdateFoundAndLost = async (id, file, description, local, status) => {
 
-    let hasLostItem = await FoundAndLost.findAll({ where: { id } });
+    let hasLostItem = await FoundAndLost.findOne({ where: { id } });
 
     if (hasLostItem) {
 

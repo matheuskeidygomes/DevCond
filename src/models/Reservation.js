@@ -15,7 +15,7 @@ export const Reservation = database.define('Reservation', {
         type: Sequelize.INTEGER,
     },
     reservation_date: {
-        type: Sequelize.DATETIME,
+        type: Sequelize.DATE,
     }
 
 },

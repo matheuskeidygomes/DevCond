@@ -43,17 +43,20 @@ routes.get('/foundandlost', Auth.private, FoundAndLostController.getAll);
 routes.post('/foundandlost', Auth.private, uploadFoundAndLost.single('file'), FoundAndLostController.AddFoundAndLost);
 routes.put('/foundandlost/:id', Auth.private, uploadFoundAndLost.single('file'), FoundAndLostController.UpdateFoundAndLost);
 
-/*
+
 
 // Unit
 
 routes.get('/unit/:id', Auth.private, UnitController.getInfo);
+routes.post('/unit', Auth.private, UnitController.addUnit);
 routes.post('/unit/:id/addperson', Auth.private, UnitController.addPerson);
 routes.post('/unit/:id/addvehicle', Auth.private, UnitController.addVehicle);
 routes.post('/unit/:id/addpet', Auth.private, UnitController.addPet);
-routes.post('/unit/:id/removeperson', Auth.private, UnitController.removePerson);
-routes.post('/unit/:id/removevehicle', Auth.private, UnitController.removeVehicle);
-routes.post('/unit/:id/removepet', Auth.private, UnitController.removePet);
+routes.delete('/unit/:id/removeperson', Auth.private, UnitController.removePerson);
+routes.delete('/unit/:id/removevehicle', Auth.private, UnitController.removeVehicle);
+routes.delete('/unit/:id/removepet', Auth.private, UnitController.removePet);
+
+/*
 
 // Reservations
 
